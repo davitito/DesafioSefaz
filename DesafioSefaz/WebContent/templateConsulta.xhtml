@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+  <h:head>
+    <title>DESAFIO SEFAZ</title>
+  </h:head>
+  <h:body>
+  	<h:form>
+  		<p:panelGrid>
+  		
+  			<p:row>
+  				<ui:insert name="cabecalho">
+					<h1>Todos Usuários</h1>
+				</ui:insert>
+  			</p:row>
+  			
+			<f:metadata>
+		    	<f:viewAction action="#{UsuarioBean.atualizarUsuarioLogado}" />
+			</f:metadata>
+				
+			<p:outputLabel value="SUPERVISÃO: " />
+			<p:outputLabel value="#{UsuarioBean.usuarioLogado.email}" />
+		</p:panelGrid>
+		
+		<p:row>
+			<p:fieldset >	
+			
+				<p:dataTable var = "usuario" value = "#{UsuarioBean.listaUsuarios}" >
+					<p:column headerText = "Nome">
+					<p:outputLabel value="#{usuario.nome}" />
+					</p:column>
+					<p:column headerText = "E-mail">
+					<p:outputLabel value="#{usuario.email}" />
+					</p:column>
+				</p:dataTable>
+				
+				<p:dataTable var = "telefone" value = "#{UsuarioBean.listaTelefones}" >
+					<p:column headerText = "E-mail">
+					<p:outputLabel value="#{telefone.email_usu}" />
+					</p:column>
+					<p:column headerText = "DDD">
+					<p:outputLabel value="#{telefone.ddd}" />
+					</p:column>
+					<p:column headerText = "Número">
+					<p:outputLabel value="#{telefone.numero}" />
+					</p:column>
+					<p:column headerText = "Tipo">
+					<p:outputLabel value="#{telefone.tipo}" />
+					</p:column>
+				</p:dataTable>
+				</p:fieldset>
+				
+		</p:row>  			
+		<p:row>
+			<p:commandButton value="Voltar" update="@form" actionListener="#{UsuarioBean.voltar}" />
+		</p:row>
+   	</h:form>
+  </h:body>
+</html>

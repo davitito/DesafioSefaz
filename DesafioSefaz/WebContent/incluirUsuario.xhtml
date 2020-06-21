@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">	
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="cabecalho">
+		<h2 align="center">INCLUIR USUÁRIO</h2>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+	
+		<f:metadata>
+		    <f:viewAction action="#{UsuarioBean.atualizarUsuarioLogado}" />
+		</f:metadata>
+		
+		<p:outputLabel value="SUPERVISÃO: " />
+		<p:outputLabel value="#{UsuarioBean.usuarioLogado.email}" />
+			
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Nome: " />
+			<p:inputText value="#{UsuarioBean.txtNome}" />
+			<p:outputLabel value="E-MAIL: " />
+			<p:inputText value="#{UsuarioBean.txtEmail}" />
+			
+			<p:outputLabel value="TELEFONE: " />
+			<p:outputLabel value=" " />
+			<p:outputLabel value="DDD:" />
+			<p:inputText value="#{UsuarioBean.txtTelDDD}" />
+			<p:outputLabel value="Número:" />
+			<p:inputText value="#{UsuarioBean.txtTelNum}" />
+			<p:outputLabel value="Tipo:" />
+			<p:inputText value="#{UsuarioBean.txtTelTipo}" />
+			<p:outputLabel value="Adicionar Telefone:" />
+			<p:commandButton value="Adicionar" update="@form" actionListener="#{UsuarioBean.adicionarTelefone}" />
+			
+			<p:outputLabel value="Senha: " />
+			<p:password value="#{UsuarioBean.txtSenha}" />
+			
+			<p:commandButton value="Voltar" update="@form" actionListener="#{UsuarioBean.voltarInicio}" />
+			<p:commandButton value="Incluir" update="@form" actionListener="#{UsuarioBean.incluirUsuario}" />
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

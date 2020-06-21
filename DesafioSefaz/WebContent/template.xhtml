@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:h="http://java.sun.com/jsf/html"
+      			xmlns:p="http://primefaces.org/ui"
+      			xmlns:ui="http://java.sun.com/jsf/facelets">
+  <h:head>
+    <title>DESAFIO SEFAZ</title>
+  </h:head>
+  <h:body>
+  	<h:form>
+  		<p:panelGrid>
+  			<p:row>
+  				<p:column colspan="2">
+  				    <ui:insert name="cabecalho">
+				      <h1>Sistema Usuários</h1>
+				    </ui:insert>
+  				</p:column>
+  			</p:row>
+  			<p:row>
+  				<p:column width="150">
+  				    <ui:insert name="menu">
+				      <p:commandButton value="Login" action="login.xhtml" />
+				      <p:commandButton value="Novo" action="incluirUsuario.xhtml" />
+				    </ui:insert>
+  				</p:column>
+  				<p:column>
+  				    <ui:insert name="conteudo">
+				      Escolha uma opção!
+				    </ui:insert>
+  				</p:column>
+  			</p:row>
+  		</p:panelGrid>
+  		
+  		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+  	</h:form>
+    
+  </h:body>
+</html>

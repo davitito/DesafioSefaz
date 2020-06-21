@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">	
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="cabecalho">
+		<h2 align="center">ESCOLHA UMA OPÇÃO - DESAFIO SEFAZ</h2>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		
+		<f:metadata>
+		    <f:viewAction action="#{UsuarioBean.atualizarUsuarioLogado}" />
+		</f:metadata>
+		
+		<p:outputLabel value="SUPERVISÃO: " />
+		<p:outputLabel value="#{UsuarioBean.usuarioLogado.email}" />
+	
+		<p:panelGrid columns="2">
+			<p:commandButton value="Alterar" action="alterar.xhtml" />
+			<p:commandButton value="Remover" action="remover.xhtml" />
+			<p:commandButton value="Consultar Todos" action="templateConsulta.xhtml" />
+			<!--  <p:commandButton value="Pesquisar" action="pesquisar.xhtml" />-->
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

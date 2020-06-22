@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import entidade.Telefone;
 import entidade.Usuario;
 import util.JdbcUtil;
 
@@ -114,7 +115,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		String sql = "SELECT U.EMAIL, U.NOME, U.SENHA FROM USUARIO U  ORDER BY U.EMAIL";
 	
-		
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 		
 		Connection conexao;
@@ -144,5 +144,43 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return listaUsuarios;
 
 	}
+	
+	public List<Usuario> consultarTodosUsuTel() {
+		
+		String sql = "SELECT * FROM USUARIO U INNER JOIN TELEFONE T ON U.EMAIL = T.EMAIL_USU ORDER BY U.EMAIL";
+		
+		List<Usuario> listaUsuariosTelefones = new ArrayList<Usuario>();
+		
+		Connection conexao;
+		
+		try {
+			
+			conexao = JdbcUtil.getConexao();
+			
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			
+			ResultSet res = ps.executeQuery();
+			
+			while (res.next()) {
+				
+				Usuario usuario = new Usuario();
+				usuario.setEmail(res.getString("EMAIL"));
+				usuario.setNome(res.getString("NOME"));
+				
+				Telefone telefone = new Telefone();
+				telefone.setDdd(res.getLong("DDD"));
+				telefone.setNumero(res.getString("NUMERO"));
+				telefone.setTipo(res.getString("TIPO"));
+				usuario.setTelefone(telefone);
+				listaUsuariosTelefones.add(usuario);
+			 }
+			ps.close();
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return listaUsuariosTelefones;
+
+	}
 }

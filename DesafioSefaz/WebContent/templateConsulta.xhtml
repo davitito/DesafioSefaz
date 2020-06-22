@@ -27,30 +27,27 @@
 		<p:row>
 			<p:fieldset >	
 			
-				<p:dataTable var = "usuario" value = "#{UsuarioBean.listaUsuarios}" >
+				<p:dataTable var = "usuario" value = "#{UsuarioBean.listaUsuariosTelefones}" >
 					<p:column headerText = "Nome">
 					<p:outputLabel value="#{usuario.nome}" />
 					</p:column>
 					<p:column headerText = "E-mail">
 					<p:outputLabel value="#{usuario.email}" />
 					</p:column>
-				</p:dataTable>
-				
-				<p:dataTable var = "telefone" value = "#{UsuarioBean.listaTelefones}" >
-					<p:column headerText = "E-mail">
-					<p:outputLabel value="#{telefone.email_usu}" />
-					</p:column>
+
+					
 					<p:column headerText = "DDD">
-					<p:outputLabel value="#{telefone.ddd}" />
+					<p:outputLabel value="#{usuario.telefone.ddd}" />
 					</p:column>
 					<p:column headerText = "Número">
-					<p:outputLabel value="#{telefone.numero}" />
+					<p:outputLabel value="#{usuario.telefone.numero}" />
 					</p:column>
 					<p:column headerText = "Tipo">
-					<p:outputLabel value="#{telefone.tipo}" />
+					<p:outputLabel value="#{usuario.telefone.tipo}" />
 					</p:column>
+					
 				</p:dataTable>
-				</p:fieldset>
+			</p:fieldset>
 				
 		</p:row>  			
 		<p:row>

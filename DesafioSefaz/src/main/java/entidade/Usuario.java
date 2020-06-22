@@ -7,6 +7,7 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
+	private Telefone telefone;
 	private List<Telefone> listaTelefonesUsu;
 
 	
@@ -32,6 +33,14 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public Telefone getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
 	}
 
 	public List<Telefone> getListaTelefonesUsu() {

@@ -47,6 +47,8 @@ public class UsuarioBean {
 	private List<Telefone> listaTelefonesAdicionais;
 	
 	private List<Telefone> listaTelefonesUsu = new ArrayList<Telefone>();
+	
+	private List<Usuario> listaUsuariosTelefones = new ArrayList<Usuario>();
 
 	
 	public UsuarioBean() {
@@ -104,6 +106,8 @@ public class UsuarioBean {
 			}else {				
 				this.usuarioDAO.incluir(novo);
 				cadastrarTelefone();
+				//essa função é chamada aqui para atualizar a lista de usuários e telefones
+				consultaTodos();
 				this.usuario = new Usuario();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 			}
@@ -215,6 +219,8 @@ public class UsuarioBean {
 			this.telefone = new Telefone();
 			this.usuarioDAO.remover(u);
 			this.usuario = new Usuario();
+			//essa função é chamada aqui para atualizar a lista de usuários e telefones
+			consultaTodos();
 			zerarCampos();
 			FacesContext.getCurrentInstance().getExternalContext().redirect("funcionalidades.xhtml");
 		}else {
@@ -228,7 +234,7 @@ public class UsuarioBean {
 	 */	
 	public void alterarUsuario() throws IOException {
 		Usuario usu = new Usuario();
-		Telefone tel = new Telefone();
+		//Telefone tel = new Telefone();
 		this.listaUsuarios = this.usuarioDAO.consultarTodos();
 		this.listaTelefones = this.telefoneDAO.consultarTodos();
 		for (Usuario usuarioPesquisa : listaUsuarios) {
@@ -239,17 +245,14 @@ public class UsuarioBean {
 				this.usuario = new Usuario();
 			}			
 		}
-		for (Telefone telefonePesquisa : listaTelefonesUsu) {
-			if (telefonePesquisa.getEmail_usu().equals(this.txtEmail)) {
-				tel = telefonePesquisa;
-				tel.setDdd(telefonePesquisa.getDdd());
-				tel.setNumero(telefonePesquisa.getNumero());
-				tel.setTipo(telefonePesquisa.getTipo());
-				this.telefoneDAO.alterar(tel);
-				this.telefone = new Telefone();
-			}
-		}
-		listaTelefones = this.telefoneDAO.consultarTodos();
+		System.out.println("listaTelefonesUsu "+listaTelefonesUsu);
+		for (Telefone alterarTel : listaTelefonesUsu) { 
+		    this.telefoneDAO.alterar(alterarTel);
+	   	 }
+		this.telefone = new Telefone();
+		
+		//essa função é chamada aqui para atualizar a lista de usuários e telefones
+		consultaTodos();
 		zerarCampos();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("funcionalidades.xhtml");
 	}
@@ -258,8 +261,7 @@ public class UsuarioBean {
 	 * A função consultaTodos é chamada logo no início para preeencher a lista de usuários e seus telefones
 	 */
 	public void consultaTodos() {
-		listaUsuarios = this.usuarioDAO.consultarTodos();
-		listaTelefones = this.telefoneDAO.consultarTodos();
+		listaUsuariosTelefones = this.usuarioDAO.consultarTodosUsuTel();
 	}
 
 	public String getTxtNome() {
@@ -372,6 +374,14 @@ public class UsuarioBean {
 
 	public void setListaTelefonesUsu(List<Telefone> listaTelefonesUsu) {
 		this.listaTelefonesUsu = listaTelefonesUsu;
+	}
+
+	public List<Usuario> getListaUsuariosTelefones() {
+		return listaUsuariosTelefones;
+	}
+
+	public void setListaUsuariosTelefones(List<Usuario> listaUsuariosTelefones) {
+		this.listaUsuariosTelefones = listaUsuariosTelefones;
 	}
 	
 	

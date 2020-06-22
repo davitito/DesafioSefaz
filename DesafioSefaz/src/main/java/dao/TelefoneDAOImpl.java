@@ -69,15 +69,17 @@ public class TelefoneDAOImpl implements TelefoneDAO {
 		Connection conexao;
 		
 		try {
+			
 			conexao = JdbcUtil.getConexao();
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			
 			ps.setLong(1, telefone.getDdd());
-			ps.setString(2, telefone.getNumero());
+			ps.setString(2, telefone.getNumero() );
 			ps.setString(3, telefone.getTipo());
 			ps.setString(4, telefone.getEmail_usu());
-			ps.execute();
+						
+			ps.executeUpdate();
 			ps.close();
 			
 		} catch (SQLException e) {

@@ -4,7 +4,7 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:ui="http://java.sun.com/jsf/facelets">	
 
-<ui:composition template="/template.xhtml">
+<ui:composition template="/index.xhtml">
 
 	<ui:define name="cabecalho">
 		<h2 align="center">ALTERAR DADOS - USUÁRIOS</h2>
@@ -34,7 +34,7 @@
 		<p:fieldset >		
 			<p:dataTable id ="DadosTelefones" editable = "true" var="telefone" value="#{UsuarioBean.listaTelefonesUsu}">
 				<p:column headerText="DDD">
-					<p:inputText value="#{telefone.ddd}" />
+					<p:inputMask value="#{telefone.ddd}" mask="99" />
 				</p:column>
 				<p:column headerText="Número">
 					<p:inputText value="#{telefone.numero}" />

@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">	
 
-<ui:composition template="/template.xhtml">
+<ui:composition template="/index.xhtml">
 	<ui:define name="cabecalho">
 		<h2 align="center">INCLUIR USUÁRIO</h2>
 	</ui:define>
@@ -27,7 +27,8 @@
 			<p:outputLabel value="TELEFONE: " />
 			<p:outputLabel value=" " />
 			<p:outputLabel value="DDD:" />
-			<p:inputText value="#{UsuarioBean.txtTelDDD}" />
+			<p:inputMask value="#{UsuarioBean.txtTelDDD}" mask="99" />
+
 			<p:outputLabel value="Número:" />
 			<p:inputText value="#{UsuarioBean.txtTelNum}" />
 			<p:outputLabel value="Tipo:" />

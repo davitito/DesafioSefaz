@@ -1,6 +1,7 @@
 package controle;
 
-import java.io.IOException;
+import java.io.*;
+//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,6 @@ import entidade.Usuario;
 @SessionScoped
 public class LoginBean {
 	
-	//Variáveis do login.xhtml
 	private String txtEmail;
 	private String txtSenha;
 	
@@ -33,12 +33,11 @@ public class LoginBean {
 		this.listaUsuarios = new ArrayList<Usuario>();
 		this.usuario = new Usuario();
 		this.usuarioDAO = new UsuarioDAOImpl();
-
 	}
 
 	/**
 	 * Validar o usuário no login para dar acesso as funcionalidades (Consultar todos - Remover e alterar)
-	 * A funcionalidade Incluir pode ser feita antes do login
+	 * A funcionalidade Incluir é feita sem precisar do login
 	 */
 	public void entrar() throws IOException {
 		Usuario usuarioLogado = null;

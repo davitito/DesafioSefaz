@@ -1,6 +1,7 @@
 package controle;
 
-import java.io.IOException;
+import java.io.*;
+//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -205,7 +206,7 @@ public class UsuarioBean {
 	public void removerUsuario() throws IOException {
 		Usuario u = new Usuario();
 		Telefone t = new Telefone();
-		boolean achou = true;
+		boolean achou = false;
 		u.setEmail(this.txtEmail);
 		t.setEmail_usu(this.txtEmail);
 		this.listaUsuarios = this.usuarioDAO.consultarTodos();
@@ -235,25 +236,31 @@ public class UsuarioBean {
 	public void alterarUsuario() throws IOException {
 		Usuario usu = new Usuario();
 		Telefone tel = new Telefone();
-		this.listaUsuarios = this.usuarioDAO.consultarTodos();
-		this.listaTelefones = this.telefoneDAO.consultarTodos();
-		for (Usuario usuarioPesquisa : listaUsuarios) {
-			if (usuarioPesquisa.getEmail().equals(this.txtEmail)) {
-				usu = usuarioPesquisa;
-				usu.setNome(this.txtNome);
-				this.usuarioDAO.alterar(usu);
-				this.usuario = new Usuario();
-			}			
+		emailValido = validarEmail(this.txtEmail);
+		if (emailValido) {
+			this.listaUsuarios = this.usuarioDAO.consultarTodos();
+			this.listaTelefones = this.telefoneDAO.consultarTodos();
+			for (Usuario usuarioPesquisa : listaUsuarios) {
+				if (usuarioPesquisa.getEmail().equals(this.txtEmail)) {
+					usu = usuarioPesquisa;
+					usu.setNome(this.txtNome);
+					this.usuarioDAO.alterar(usu);
+					this.usuario = new Usuario();
+				}			
+			}
+			for (Telefone alterarTel : listaTelefonesUsu) { 
+				tel = alterarTel;
+			    this.telefoneDAO.alterar(tel);
+		   	 }
+			this.telefone = new Telefone();
+			//essa função é chamada aqui para atualizar a lista de usuários e telefones
+			consultaTodos();
+			zerarCampos();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("funcionalidades.xhtml");
+		}else {
+			FacesContext.getCurrentInstance()
+			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atenção!", "Usuário não encontrado!!!"));
 		}
-		for (Telefone alterarTel : listaTelefonesUsu) { 
-			tel = alterarTel;
-		    this.telefoneDAO.alterar(tel);
-	   	 }
-		this.telefone = new Telefone();
-		//essa função é chamada aqui para atualizar a lista de usuários e telefones
-		consultaTodos();
-		zerarCampos();
-		FacesContext.getCurrentInstance().getExternalContext().redirect("funcionalidades.xhtml");
 	}
 	
 	/**

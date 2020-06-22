@@ -234,7 +234,7 @@ public class UsuarioBean {
 	 */	
 	public void alterarUsuario() throws IOException {
 		Usuario usu = new Usuario();
-		//Telefone tel = new Telefone();
+		Telefone tel = new Telefone();
 		this.listaUsuarios = this.usuarioDAO.consultarTodos();
 		this.listaTelefones = this.telefoneDAO.consultarTodos();
 		for (Usuario usuarioPesquisa : listaUsuarios) {
@@ -245,12 +245,11 @@ public class UsuarioBean {
 				this.usuario = new Usuario();
 			}			
 		}
-		System.out.println("listaTelefonesUsu "+listaTelefonesUsu);
 		for (Telefone alterarTel : listaTelefonesUsu) { 
-		    this.telefoneDAO.alterar(alterarTel);
+			tel = alterarTel;
+		    this.telefoneDAO.alterar(tel);
 	   	 }
 		this.telefone = new Telefone();
-		
 		//essa função é chamada aqui para atualizar a lista de usuários e telefones
 		consultaTodos();
 		zerarCampos();

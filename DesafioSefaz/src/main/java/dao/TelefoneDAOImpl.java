@@ -64,7 +64,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
 	}
 	public void alterar(Telefone telefone) {
 		
-		String sql = "UPDATE TELEFONE SET DDD = ? , NUMERO = ?, TIPO = ? WHERE EMAIL_USU = ?";
+		String sql = "UPDATE TELEFONE SET DDD = ? , NUMERO = ?, TIPO = ? WHERE ID = ?";
 		
 		Connection conexao;
 		
@@ -77,7 +77,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
 			ps.setLong(1, telefone.getDdd());
 			ps.setString(2, telefone.getNumero() );
 			ps.setString(3, telefone.getTipo());
-			ps.setString(4, telefone.getEmail_usu());
+			ps.setLong(4, telefone.getId());
 						
 			ps.executeUpdate();
 			ps.close();
@@ -111,7 +111,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
 
 	public Telefone pesquisar(String email_usu) {
 
-		String sql = "SELECT T.EMAIL_USU, T.DDD, T.NUMERO, T.TIPO FROM TELEFONE T WHERE T.EMAIL_USU = ? ORDER BY T.EMAIL_USU";
+		String sql = "SELECT T.ID, T.DDD, T.NUMERO, T.TIPO, T.EMAIL_USU FROM TELEFONE T WHERE T.EMAIL_USU = ? ORDER BY T.EMAIL_USU";
 		Telefone telefone = null;
 		
 		Connection conexao;
@@ -126,11 +126,11 @@ public class TelefoneDAOImpl implements TelefoneDAO {
 
 			while (res.next()) {
 				telefone = new Telefone();
-				telefone.setEmail_usu(res.getString("EMAIL_USU"));
+				telefone.setId(res.getLong("ID"));
 				telefone.setDdd(res.getLong("DDD"));
 				telefone.setNumero(res.getString("NUMERO"));
 				telefone.setTipo(res.getString("TIPO"));
-				
+				telefone.setEmail_usu(res.getString("EMAIL_USU"));				
 		 }
 			
 			ps.close();
@@ -144,7 +144,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
 
 	public List<Telefone> consultarTodos() {
 		
-		String sql = "SELECT T.EMAIL_USU, T.DDD, T.NUMERO, T.TIPO FROM TELEFONE T ORDER BY T.EMAIL_USU";
+		String sql = "SELECT T.ID, T.DDD, T.NUMERO, T.TIPO, T.EMAIL_USU FROM TELEFONE T ORDER BY T.EMAIL_USU";
 		
 		List<Telefone> listaTelefones = new ArrayList<Telefone>();
 		
@@ -159,10 +159,11 @@ public class TelefoneDAOImpl implements TelefoneDAO {
 			while (res.next()) {
 				
 				Telefone telefone = new Telefone();
-				telefone.setEmail_usu(res.getString("EMAIL_USU"));
+				telefone.setId(res.getLong("ID"));
 				telefone.setDdd(res.getLong("DDD"));
 				telefone.setNumero(res.getString("NUMERO"));
 				telefone.setTipo(res.getString("TIPO"));
+				telefone.setEmail_usu(res.getString("EMAIL_USU"));
 				listaTelefones.add(telefone);
 
 			 }

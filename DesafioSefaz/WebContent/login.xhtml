@@ -16,6 +16,7 @@
 			<p:outputLabel value="Senha: " />
 			<p:password value="#{LoginBean.txtSenha}" />
 			<p:commandButton value="Entrar" update="@form" action="#{LoginBean.entrar}" />
+			<p:commandButton value="Sair" update="@form" action="#{UsuarioBean.sair}" />
 		</p:panelGrid>
 
 	</ui:define>

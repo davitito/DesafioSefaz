@@ -193,6 +193,11 @@ public class UsuarioBean {
 		zerarCampos();
 	}
 	
+	public void sair() throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+		zerarCampos();
+	}
+	
 	public void zerarCampos() {
 		txtNome = "";	
 		txtEmail = "";
